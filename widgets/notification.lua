@@ -1,5 +1,5 @@
 local awful  = require("awful")
-local faicon = require("themes.default.faicon")
+local faicon = require("widgets.common.faicon")
 local notify = require("utils.notify")
 
 local getIsPaused = naughty.instance.is_suspended()

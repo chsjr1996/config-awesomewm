@@ -1,6 +1,6 @@
 local awful  = require("awful")
 local spawn  = require("awful.spawn")
-local faicon = require("themes.default.faicon")
+local faicon = require("widgets.common.faicon")
 local notify = require("utils.notify")
 
 local getCurrentBatLevel = 'cat /sys/class/power_supply/BAT0/capacity'

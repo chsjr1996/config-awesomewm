@@ -1,6 +1,6 @@
 local awful  = require("awful")
 local spawn  = require("awful.spawn")
-local faicon = require("themes.default.faicon")
+local faicon = require("widgets.common.faicon")
 
 local getIsMuted       = "pactl get-source-mute @DEFAULT_SOURCE@"
 local toggleMute       = 'pactl set-source-mute @DEFAULT_SOURCE@ toggle'

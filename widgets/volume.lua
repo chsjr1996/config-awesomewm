@@ -1,6 +1,6 @@
 local awful          = require("awful")
 local spawn          = require("awful.spawn")
-local faicon         = require("themes.default.faicon")
+local faicon         = require("widgets.common.faicon")
 local volumechange   = require("utils.volumechange")
 local commonsettings = require("utils.commonsettings")
 
