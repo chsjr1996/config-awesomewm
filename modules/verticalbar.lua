@@ -10,7 +10,7 @@ local widget_launcher     = require("widgets.launcher")
 local widget_taglist      = require("widgets.taglist")
 
 -- Right widgets (top-down of the bar)
--- local widget_notification = require("widgets.notification")
+local widget_tray         = require("widgets.tray")
 local widget_microphone   = require("widgets.microphone")
 local widget_volume       = require("widgets.volume")
 local widget_brightness   = require("widgets.brightness")
@@ -66,16 +66,7 @@ local function verticalbar(s)
                         direction = "west",
                         widget = wibox.container.rotate,
                     },
-                    -- {
-                    --     widget_notification(),
-                    --     direction = "west",
-                    --     widget = wibox.container.rotate,
-                    -- },
-                    {
-                        wibox.widget.systray(),
-                        margins = 5,
-                        widget = wibox.container.margin,
-                    },
+                    widget_tray(),
                 },
                 direction = "east",
                 widget = wibox.container.rotate,

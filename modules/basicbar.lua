@@ -13,7 +13,7 @@ local widget_promptbox    = require("widgets.promptbox")
 -- Center widgets
 local widget_clock        = require("widgets.clock")
 -- Right widgets
--- local widget_notification = require("widgets.notification")
+local widget_tray         = require("widgets.tray")
 local widget_microphone   = require("widgets.microphone")
 local widget_volume       = require("widgets.volume")
 local widget_brightness   = require("widgets.brightness")
@@ -52,11 +52,7 @@ local function basicbar(s)
                 { -- Right widgets
                     layout = wibox.layout.fixed.horizontal,
                     spacing = 10,
-                    {
-                        wibox.widget.systray(),
-                        margins = 5,
-                        widget = wibox.container.margin,
-                    },
+                    widget_tray(),
                     widget_microphone(),
                     widget_volume(),
                     widget_brightness(),
