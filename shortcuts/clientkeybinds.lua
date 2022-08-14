@@ -2,13 +2,13 @@ local awful = require("awful")
 
 function clientkeybinds()
     awful.keyboard.append_global_keybindings({
-      awful.key({ modkey,           }, "j",
+      awful.key({ modkey,           }, "l",
           function ()
               awful.client.focus.byidx( 1)
           end,
           {description = "focus next by index", group = "client"}
       ),
-      awful.key({ modkey,           }, "k",
+      awful.key({ modkey,           }, "h",
           function ()
               awful.client.focus.byidx(-1)
           end,

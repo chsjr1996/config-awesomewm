@@ -4,6 +4,20 @@ function tagkeybinds()
     awful.keyboard.append_global_keybindings({
         awful.key({ "Mod1", }, "Escape", awful.tag.history.restore,
                   {description = "go back", group = "tag"}),
+        awful.key({ modkey, }, "j",
+            function ()
+                local screen = awful.screen.focused()
+                awful.tag.viewnext(screen)
+            end,
+            {description = "focus next by index", group = "tag"}
+        ),
+        awful.key({ modkey, }, "k",
+            function ()
+                local screen = awful.screen.focused()
+                awful.tag.viewprev(screen)
+            end,
+            {description = "focus previous by index", group = "tag"}
+        ),
         awful.key {
             modifiers   = { modkey },
             keygroup    = "numrow",

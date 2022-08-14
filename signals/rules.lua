@@ -53,5 +53,20 @@ ruled.client.connect_signal("request::rules", function()
               border_width = 0,
           }
     }
+
+    -- Specific rules
+    ruled.client.append_rule {
+        id         = "padding_border",
+        rule_any   = {
+            class = {
+              "neovide"
+            },
+        },
+        properties = {
+            border_width = 15,
+            border_color = "#0f111a",
+        }
+    }
 end)
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

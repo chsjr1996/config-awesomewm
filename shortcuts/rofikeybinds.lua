@@ -1,46 +1,47 @@
 local awful = require("awful")
 
-local rofiLaunchersDir = os.getenv("HOME").."/.config/rofi/launchers"
+local groupname = "rofi"
 
 local function rofikeybinds()
     awful.keyboard.append_global_keybindings({
         awful.key({ modkey }, "space",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/apps.sh")
+                      awful.spawn.with_shell(Rofi_apps)
                   end,
-                  {description = "show the menubar", group = "launcher"}),
+                  {description = "show the menubar", group = groupname}),
         awful.key({ modkey,           }, "F1",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/clipboard.sh")
+                      awful.spawn.with_shell(Rofi_clipboard)
                   end,
-                  {description = "show clipboard menu", group = "rofi"}),
+                  {description = "show clipboard menu", group = groupname}),
         awful.key({ modkey,           }, "F2",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/roficalc.sh")
+                      awful.spawn.with_shell(Rofi_calc)
                   end,
-                  {description = "show calc menu", group = "rofi"}),
+                  {description = "show calc menu", group = groupname}),
         awful.key({ modkey,           }, "F3",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/rofimoji.sh")
+                      awful.spawn.with_shell(Rofi_emoji)
                   end,
-                  {description = "show emoji menu", group = "rofi"}),
+                  {description = "show emoji menu", group = groupname}),
         awful.key({ modkey,           }, "F4",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/rofilocate.sh")
+                      awful.spawn.with_shell(Rofi_locate)
                   end,
-                  {description = "show locate menu", group = "rofi"}),
+                  {description = "show locate menu", group = groupname}),
         awful.key({ modkey,           }, "F5",
                   function()
-                      awful.spawn.with_shell(rofiLaunchersDir.."/rofifilebrowser.sh")
+                      awful.spawn.with_shell(Rofi_browser)
                   end,
-                  {description = "show file browser", group = "rofi"}),
+                  {description = "show file browser", group = groupname}),
         awful.key({ modkey,           }, "Tab",
                   function ()
-                    awful.spawn.with_shell(rofiLaunchersDir.."/window.sh")
+                    awful.spawn.with_shell(Rofi_window)
                   end,
-                  {description = "show window selector", group = "rofi"}),
+                  {description = "show window selector", group = groupname}),
     })
 end
 
 return rofikeybinds
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

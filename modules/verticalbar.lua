@@ -1,13 +1,15 @@
 local awful               = require("awful")
 local wibox               = require("wibox")
 
+local theme               = require("theme")
+
+local widget_separator    = require("widgets.separator")
+
 -- Left widgets
-local widget_vtaglist     = require("widgets.vtaglist")
+local widget_launcher     = require("widgets.launcher")
+local widget_taglist      = require("widgets.taglist")
 
--- Middle widgets
-local widget_vtasklist    = require("widgets.vtasklist")
-
--- Right widgets
+-- Right widgets (top-down of the bar)
 -- local widget_notification = require("widgets.notification")
 local widget_microphone   = require("widgets.microphone")
 local widget_volume       = require("widgets.volume")
@@ -15,42 +17,30 @@ local widget_brightness   = require("widgets.brightness")
 local widget_memory       = require("widgets.memory")
 local widget_cpu          = require("widgets.cpu")
 local widget_fan          = require("widgets.fan")
-local widget_clock        = require("widgets.clock")
 local widget_layoutbox    = require("widgets.layoutbox")
 
-local function verticalbar(screen)
-    screen.verticalbar    = awful.wibar {
+local function verticalbar(s)
+    s.verticalbar    = awful.wibar {
         position     = "left",
-        screen       = screen,
-        width        = 35,
-        bg           = "#000000",
+        align        = "bottom",
+        screen       = s,
+        width        = theme.bars_size,
+        height       = s.geometry.height,
+        bg           = theme.bars_bg,
         widget       = {
             layout = wibox.layout.align.vertical,
             { -- Left widgets
                 layout = wibox.layout.fixed.vertical,
-                widget_vtaglist(screen),
+                widget_launcher(),
+                widget_separator(),
+                widget_taglist(s, true),
             },
-            -- Middle widget
-            widget_vtasklist(screen),
             { -- Right widgets
                 {
                     layout = wibox.layout.fixed.horizontal,
-                    spacing = 8,
-                    {
-                        widget_layoutbox(screen),
-                        direction = "west",
-                        widget = wibox.container.rotate,
-                    },
-                    {
-                        widget_clock(),
-                        direction = "west",
-                        widget = wibox.container.rotate,
-                    },
-                    {
-                        widget_fan(),
-                        direction = "west",
-                        widget = wibox.container.rotate,
-                    },
+                    spacing = 20,
+                    widget_layoutbox(s, true),
+                    widget_fan(),
                     {
                         widget_cpu(),
                         direction = "west",
@@ -76,6 +66,11 @@ local function verticalbar(screen)
                         direction = "west",
                         widget = wibox.container.rotate,
                     },
+                    -- {
+                    --     widget_notification(),
+                    --     direction = "west",
+                    --     widget = wibox.container.rotate,
+                    -- },
                     {
                         wibox.widget.systray(),
                         margins = 5,
@@ -91,3 +86,4 @@ end
 
 return verticalbar
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

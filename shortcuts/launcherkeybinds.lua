@@ -2,7 +2,7 @@ local awful   = require("awful")
 local menubar = require("menubar")
 
 local function launcherkeybinds()
-    menubar.utils.terminal = terminal
+    menubar.utils.terminal = Terminal
 
     awful.keyboard.append_global_keybindings({
         awful.key({ modkey, "Shift" }, "r",
@@ -12,7 +12,7 @@ local function launcherkeybinds()
                   {description = "refresh menubar", group = "launcher"}),
         awful.key({ modkey,           }, "Return",
                   function ()
-                      awful.spawn(terminal)
+                      awful.spawn(Terminal)
                   end,
                   {description = "open a terminal", group = "launcher"}),
         awful.key({ modkey },            "r",

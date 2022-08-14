@@ -1,5 +1,5 @@
 local wibox = require("wibox")
-local theme = require("themes.default.theme")
+local theme = require("theme")
 
 -- Font Awesome icon maker
 --- @see https://www.reddit.com/r/awesomewm/comments/kq79jn/awesomewm_icons_made_easy/

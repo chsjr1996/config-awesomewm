@@ -1,6 +1,7 @@
 local spawn  = require("awful.spawn")
 local notify = require("utils.notify")
 
+local notification     = nil
 local max_volume       = 150
 local step             = '5'
 local getCurrentVolume = os.getenv("HOME") .. '/.scripts/get_current_volume.sh'
@@ -15,7 +16,10 @@ local function volumechange(action)
   spawn.easy_async(getCurrentVolume,
     function(stdout)
       current_volume = tonumber(stdout)
-      notify("Volume", stdout)
+      notification = notify(notification, "Volume", stdout)
+      notification:connect_signal('destroyed', function(reason, keep_alive)
+        notification = nil
+      end)
     end
   )
 end

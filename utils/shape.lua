@@ -1,6 +1,6 @@
 local gears = require("gears")
 
-local radius = 15
+local radius = 5
 
 function rounded_shape(cr,w,h)
     gears.shape.rounded_rect(cr,w,h,radius)

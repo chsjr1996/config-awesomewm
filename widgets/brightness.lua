@@ -3,6 +3,7 @@ local spawn  = require("awful.spawn")
 local faicon = require("widgets.common.faicon")
 local notify = require("utils.notify")
 
+local notification       = nil
 local getCurrentBatLevel = 'cat /sys/class/power_supply/BAT0/capacity'
 local chargingStatus     = 'acpi -a'
 local isCharging         = true
@@ -12,7 +13,10 @@ local function brightness_change(action)
   spawn.with_shell('light ' .. action .. ' ' .. step)
   spawn.easy_async('light -G',
     function(stdout)
-      notify("Brightness", stdout)
+      notification = notify(notification, "Brightness", stdout)
+      notification:connect_signal('destroyed', function(reason, keep_alive)
+        notification = nil
+      end)
     end
   )
 end
@@ -20,7 +24,10 @@ end
 local function get_current_bat_level()
   spawn.easy_async(getCurrentBatLevel,
     function(stdout)
-      notify("Battery", stdout)
+      notification = notify(notification, "Battery", stdout)
+      notification:connect_signal('destroyed', function(reason, keep_alive)
+        notification = nil
+      end)
     end
   )
 end

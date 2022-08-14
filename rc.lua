@@ -1,21 +1,15 @@
 -- {{{ Core/Globals
-pcall(require, "luarocks.loader")
-require("awful.autofocus")
-
-naughty    = require("modules.naughty")
-terminal   = os.getenv("TERMINAL") or "kitty"
-editor     = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
-modkey     = "Mod4"
+require("globals")
 --- }}}
 
+
 -- {{{ Modules
-require("modules.layouts")
 require("modules.autostart")
 require("modules.tweaks")
 -- }}}
 
 --- {{{ Signals
+require("signals.defaultlayouts")
 require("signals.rules")
 require("signals.desktopdecoration")
 require("signals.manage")
