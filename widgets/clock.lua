@@ -1,24 +1,15 @@
 local spawn = require("awful.spawn")
 local wibox = require("wibox")
 
-local theme             = require("theme")
-local commonsettings    = require("utils.commonsettings")
-local changewiboxcursor = require("utils.changewiboxcursor")
-
+local theme          = require("theme")
+local commonsettings = require("utils.commonsettings")
+local changecursor   = require("signals.changecursor")
 
 local popupApp = os.getenv("HOME") .. "/.scripts/kitty-float.sh --interactive Calendar calcurse"
 
 local function clock_signals(widget)
     widget:connect_signal("button::press", function()
         spawn(popupApp, commonsettings.centered_medium_client)
-    end)
-
-    widget:connect_signal("mouse::enter", function()
-        changewiboxcursor("hand2")
-    end)
-
-    widget:connect_signal("mouse::leave", function()
-        changewiboxcursor(nil)
     end)
 end
 
@@ -32,6 +23,7 @@ local function widget_clock()
     textclock.font  = "sans 12"
 
     clock_signals(clockmargin)
+    changecursor(clockbackground)
 
     clockmargin:set_margins(10)
     clockmargin:set_widget(textclock)

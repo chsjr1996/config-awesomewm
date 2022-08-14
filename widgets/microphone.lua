@@ -1,6 +1,8 @@
 local awful  = require("awful")
 local spawn  = require("awful.spawn")
-local faicon = require("widgets.common.faicon")
+
+local faicon       = require("widgets.common.faicon")
+local changecursor = require("signals.changecursor")
 
 local getIsMuted       = "pactl get-source-mute @DEFAULT_SOURCE@"
 local toggleMute       = 'pactl set-source-mute @DEFAULT_SOURCE@ toggle'
@@ -15,7 +17,7 @@ local function open_mixer()
 end
 
 local function microphone()
-    return awful.widget.watch(getIsMuted, 3, function (widget, stdout)
+    local microphonewidget = awful.widget.watch(getIsMuted, 3, function (widget, stdout)
         if string.find(stdout, 'yes') then
           widget:set_markup_silently(faicon.fa_markup('\u{f131}', '#FFFFFF'))
         else
@@ -29,7 +31,12 @@ local function microphone()
           )
         )
     end, faicon.fa_widget())
+
+    changecursor(microphonewidget)
+
+    return microphonewidget
 end
 
 return microphone
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

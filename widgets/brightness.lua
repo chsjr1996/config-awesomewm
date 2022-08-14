@@ -1,7 +1,9 @@
-local awful  = require("awful")
-local spawn  = require("awful.spawn")
-local faicon = require("widgets.common.faicon")
-local notify = require("utils.notify")
+local awful = require("awful")
+local spawn = require("awful.spawn")
+
+local faicon       = require("widgets.common.faicon")
+local notify       = require("utils.notify")
+local changecursor = require("signals.changecursor")
 
 local notification       = nil
 local getCurrentBatLevel = 'cat /sys/class/power_supply/BAT0/capacity'
@@ -45,7 +47,7 @@ local function checkIsCharging()
 end
 
 local function brightness()
-    return awful.widget.watch(getCurrentBatLevel, 3, function (widget, stdout)
+    local brightnesswidget = awful.widget.watch(getCurrentBatLevel, 3, function (widget, stdout)
         checkIsCharging()
 
         if tonumber(stdout) <= 60 and isCharging == false then
@@ -66,7 +68,12 @@ local function brightness()
           )
         )
     end, faicon.fa_widget())
+
+    changecursor(brightnesswidget)
+
+    return brightnesswidget
 end
 
 return brightness
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

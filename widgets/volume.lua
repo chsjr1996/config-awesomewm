@@ -1,8 +1,10 @@
-local awful          = require("awful")
-local spawn          = require("awful.spawn")
+local awful = require("awful")
+local spawn = require("awful.spawn")
+
 local faicon         = require("widgets.common.faicon")
 local volumechange   = require("utils.volumechange")
 local commonsettings = require("utils.commonsettings")
+local changecursor   = require("signals.changecursor")
 
 local getIsMuted   = "pactl get-sink-mute @DEFAULT_SINK@ | awk '/yes/ {print $2; exit}'"
 local toggleMute   = 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
@@ -17,7 +19,7 @@ local function open_mixer()
 end
 
 local function volume()
-    return awful.widget.watch(getIsMuted, 3, function (widget, stdout)
+    local volumewidget = awful.widget.watch(getIsMuted, 3, function (widget, stdout)
         if string.find(stdout, 'yes') then
           widget:set_markup_silently(faicon.fa_markup('\u{f6a9}', '#FFFFFF'))
         else
@@ -33,7 +35,12 @@ local function volume()
           )
         )
     end, faicon.fa_widget())
+
+    changecursor(volumewidget)
+
+    return volumewidget
 end
 
 return volume
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
