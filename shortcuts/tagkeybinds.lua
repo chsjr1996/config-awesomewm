@@ -2,16 +2,16 @@ local awful = require("awful")
 
 function tagkeybinds()
     awful.keyboard.append_global_keybindings({
-        awful.key({ "Mod1", }, "Escape", awful.tag.history.restore,
+        awful.key({ Altkey, }, "Escape", awful.tag.history.restore,
                   {description = "go back", group = "tag"}),
-        awful.key({ modkey, }, "j",
+        awful.key({ Modkey, }, "j",
             function ()
                 local screen = awful.screen.focused()
                 awful.tag.viewnext(screen)
             end,
             {description = "focus next by index", group = "tag"}
         ),
-        awful.key({ modkey, }, "k",
+        awful.key({ Modkey, }, "k",
             function ()
                 local screen = awful.screen.focused()
                 awful.tag.viewprev(screen)
@@ -19,7 +19,7 @@ function tagkeybinds()
             {description = "focus previous by index", group = "tag"}
         ),
         awful.key {
-            modifiers   = { modkey },
+            modifiers   = { Modkey },
             keygroup    = "numrow",
             description = "only view tag",
             group       = "tag",
@@ -32,7 +32,7 @@ function tagkeybinds()
             end,
         },
         awful.key {
-            modifiers   = { modkey, "Control" },
+            modifiers   = { Modkey, "Control" },
             keygroup    = "numrow",
             description = "toggle tag",
             group       = "tag",
@@ -45,7 +45,7 @@ function tagkeybinds()
             end,
         },
         awful.key {
-            modifiers = { modkey, "Shift" },
+            modifiers = { Modkey, "Shift" },
             keygroup    = "numrow",
             description = "move focused client to tag",
             group       = "tag",
@@ -59,7 +59,7 @@ function tagkeybinds()
             end,
         },
         awful.key {
-            modifiers   = { modkey, "Control", "Shift" },
+            modifiers   = { Modkey, "Control", "Shift" },
             keygroup    = "numrow",
             description = "toggle focused client on tag",
             group       = "tag",

@@ -2,17 +2,17 @@ local awful = require("awful")
 
 local function multimediabinds()
     awful.keyboard.append_global_keybindings({
-        awful.key({ modkey }, ";",
+        awful.key({ Modkey }, ";",
                   function()
                     awful.spawn.with_shell("playerctl play-pause")
                   end,
                   {description = "toggle play pause media", group = "multimedia"}),
-        awful.key({ modkey }, ".",
+        awful.key({ Modkey }, ".",
                   function()
                     awful.spawn.with_shell("playerctl next")
                   end,
                   {description = "next media", group = "multimedia"}),
-        awful.key({ modkey }, ",",
+        awful.key({ Modkey }, ",",
                   function()
                     awful.spawn.with_shell("playerctl previous")
                   end,

@@ -6,13 +6,13 @@ require("awful.hotkeys_popup.keys")
 
 function awesomekeybinds()
     awful.keyboard.append_global_keybindings({
-      awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
+      awful.key({ Modkey,           }, "/",      hotkeys_popup.show_help,
                 {description="show help", group="awesome"}),
-      awful.key({ modkey, "Control" }, "r", awesome.restart,
+      awful.key({ Modkey, "Control" }, "r", awesome.restart,
                 {description = "reload awesome", group = "awesome"}),
-      awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+      awful.key({ Modkey, "Shift"   }, "q", awesome.quit,
                 {description = "quit awesome", group = "awesome"}),
-      awful.key({ modkey }, "b",
+      awful.key({ Modkey }, "b",
         function()
           local myscreen = awful.screen.focused()
           myscreen.mainbar.visible = not myscreen.mainbar.visible

@@ -14,12 +14,12 @@ local function systembinds()
                     volumechange('-')
                   end,
                   {description = "decrease volume", group = "system"}),
-        awful.key({ modkey }, "Up",
+        awful.key({ Modkey }, "Up",
                   function()
                     volumechange('+')
                   end,
                   {description = "increase volume", group = "system"}),
-        awful.key({ modkey }, "Down",
+        awful.key({ Modkey }, "Down",
                   function()
                     volumechange('-')
                   end,
@@ -41,12 +41,12 @@ local function systembinds()
                     awful.spawn.with_shell("light -U 5")
                   end,
                   {description = "decrease bright", group = "system"}),
-        awful.key({ modkey }, "Right",
+        awful.key({ Modkey }, "Right",
                   function()
                     awful.spawn.with_shell("light -A 5")
                   end,
                   {description = "increase bright", group = "system"}),
-        awful.key({ modkey }, "Left",
+        awful.key({ Modkey }, "Left",
                   function()
                     awful.spawn.with_shell("light -U 5")
                   end,

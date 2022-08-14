@@ -2,7 +2,7 @@ local awful = require("awful")
 
 local function utilskeybinds()
     awful.keyboard.append_global_keybindings({
-        awful.key({ modkey }, "p",
+        awful.key({ Modkey }, "p",
                   function()
                     awful.spawn.with_shell("rofi-pass")
                   end,

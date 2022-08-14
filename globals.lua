@@ -5,7 +5,7 @@ Naughty    = require("modules.naughty")
 -- }}}
 
 -- {{{ Main keys
-modkey     = "Mod4"
+Modkey     = "Mod4"
 Altkey     = "Mod1"
 -- }}}
 
