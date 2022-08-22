@@ -5,7 +5,7 @@ local dpi          = xresources.apply_dpi
 local gfs         = require("gears.filesystem")
 local themes_path = gfs.get_configuration_dir().."theme/"
 
-local colors = require("theme.colors")
+local colors      = require("theme.colors."..Theme_color)
 
 local theme = {}
 
@@ -53,7 +53,7 @@ theme.bars_bg         = "#000000"
 
 -- Tag list adjusts
 theme.taglist_font     = "Font Awesome 6 Free Solid "
-theme.taglist_fg_focus = "#a60909"
+theme.taglist_fg_focus = colors.accent
 theme.taglist_spacing  = dpi(10)
 
 -- Task list adjusts

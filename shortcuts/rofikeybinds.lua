@@ -4,7 +4,7 @@ local groupname = "rofi"
 
 local function rofikeybinds()
     awful.keyboard.append_global_keybindings({
-        awful.key({ Modkey }, "space",
+        awful.key({ Modkey }, "a",
                   function()
                       awful.spawn.with_shell(Rofi_apps)
                   end,

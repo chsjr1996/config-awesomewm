@@ -1,28 +1,24 @@
-local spawn  = require("awful.spawn")
-local notify = require("utils.notify")
+local spawn = require("awful.spawn")
+local theme = require("theme")
 
-local notification     = nil
-local max_volume       = 150
-local step             = '5'
-local getCurrentVolume = os.getenv("HOME") .. '/.scripts/get_current_volume.sh'
-local setCurrentVolume = 'pactl set-sink-volume @DEFAULT_SINK@ '
-local current_volume   = tonumber(spawn.with_shell(getCurrentVolume))
+local notification        = nil
+local maxvolume           = 150
+local step                = '5'
+local volumecontrolscript = Scripts_dir..'/volume_control.sh'
 
 local function volumechange(action)
-  if current_volume <= max_volume or action == '-' then
-    spawn.with_shell(setCurrentVolume .. action .. step .. '%')
-  end
-
-  spawn.easy_async(getCurrentVolume,
-    function(stdout)
-      current_volume = tonumber(stdout)
-      notification = notify(notification, "Volume", stdout)
-      notification:connect_signal('destroyed', function(reason, keep_alive)
-        notification = nil
-      end)
-    end
-  )
+    spawn.easy_async_with_shell(volumecontrolscript..' --get', function(currentvolume)
+        if tonumber(currentvolume) <= maxvolume or action == '-' then
+            spawn.with_shell(volumecontrolscript..' --set '..action..step..'%')
+            awesome.emit_signal(OSD_change,
+                currentvolume,
+                '\u{f028}',
+                theme.accent
+            )
+        end
+    end)
 end
 
 return volumechange
 
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

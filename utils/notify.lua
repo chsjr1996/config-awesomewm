@@ -1,11 +1,14 @@
-local function notify(notification, title, text)
+local defaultposition = Basic_theme_layout and 'top_right' or 'bottom_left'
+
+local function notify(notification, title, text, changeposition)
     if notification and not notification.is_expired then
         notification.message = text
     else
         notification = Naughty.instance.notification {
             title = title,
             message = text,
-            timeout = 5
+            timeout = 5,
+            position = changeposition or defaultposition
         }
     end
 

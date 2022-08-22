@@ -31,7 +31,10 @@ ruled.client.connect_signal("request::rules", function()
                 "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
             }
         },
-        properties = { floating = true }
+        properties = {
+            floating  = true,
+            placement = awful.placement.centered
+        }
     }
 
     -- Add titlebars to normal clients and dialogs
@@ -64,7 +67,7 @@ ruled.client.connect_signal("request::rules", function()
         },
         properties = {
             border_width = 15,
-            border_color = "#0f111a",
+            border_color = "#282a36",
         }
     }
 end)

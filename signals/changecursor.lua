@@ -1,6 +1,8 @@
 local changewiboxcursor = require("utils.changewiboxcursor")
 
 local function changecursor(widget, cursor)
+    if not widget then return end
+
     widget:connect_signal("mouse::enter", function()
         changewiboxcursor(cursor or "hand2")
     end)

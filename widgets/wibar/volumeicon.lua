@@ -6,20 +6,19 @@ local volumechange   = require("utils.volumechange")
 local commonsettings = require("utils.commonsettings")
 local changecursor   = require("signals.changecursor")
 
-local getIsMuted   = "pactl get-sink-mute @DEFAULT_SINK@ | awk '/yes/ {print $2; exit}'"
-local toggleMute   = 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+local volumecontrolscript = Scripts_dir..'/volume_control.sh'
 local mixerCmd     = os.getenv("HOME") .. '/.scripts/kitty-float.sh --interactive Mixer pulsemixer'
 
 local function toggle_mute()
-  spawn.with_shell(toggleMute)
+    spawn.with_shell(volumecontrolscript..' --togglemute')
 end
 
 local function open_mixer()
-  spawn(mixerCmd, commonsettings.centered_medium_client)
+    spawn(mixerCmd, commonsettings.centered_medium_client)
 end
 
-local function volume()
-    local volumewidget = awful.widget.watch(getIsMuted, 3, function (widget, stdout)
+local function volumeicon()
+    local volumewidget = awful.widget.watch(volumecontrolscript..' --ismuted', 3, function (widget, stdout)
         if string.find(stdout, 'yes') then
           widget:set_markup_silently(faicon.fa_markup('\u{f6a9}', '#FFFFFF'))
         else
@@ -41,6 +40,6 @@ local function volume()
     return volumewidget
 end
 
-return volume
+return volumeicon
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

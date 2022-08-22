@@ -1,16 +1,27 @@
+local awful = require("awful")
 local spawn = require("awful.spawn")
 local wibox = require("wibox")
 
 local theme          = require("theme")
-local commonsettings = require("utils.commonsettings")
 local changecursor   = require("signals.changecursor")
+local notify         = require("utils.notify")
 
-local popupApp = os.getenv("HOME") .. "/.scripts/kitty-float.sh --interactive Calendar calcurse"
+local notification = nil
 
-local function clock_signals(widget)
-    widget:connect_signal("button::press", function()
-        spawn(popupApp, commonsettings.centered_medium_client)
-    end)
+local function add_clock_buttons(widget)
+    widget:buttons(
+      awful.util.table.join(
+        awful.button({}, 1, function ()
+            notification = notify(notification, "Date", os. date ("%A, %d %B %Y"), "top_center")
+            notification:connect_signal('destroyed', function(reason, keep_alive)
+                notification = nil
+            end)
+        end),
+        awful.button({}, 3, function ()
+            spawn(Calendar_popup_app)
+        end)
+      )
+    )
 end
 
 local function widget_clock()
@@ -22,15 +33,14 @@ local function widget_clock()
     local textclock = wibox.widget.textclock('<b>%H:%M</b>')
     textclock.font  = "sans 12"
 
-    clock_signals(clockmargin)
-    changecursor(clockbackground)
-
     clockmargin:set_margins(10)
     clockmargin:set_widget(textclock)
-
     clockbackground:set_widget(clockmargin)
     clockbackground:set_bg(clockbgcolor)
     clockbackground:set_fg(clockfgcolor)
+
+    add_clock_buttons(clockbackground)
+    changecursor(clockbackground)
 
     return clockbackground
 end

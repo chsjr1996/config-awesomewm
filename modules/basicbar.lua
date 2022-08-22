@@ -15,8 +15,8 @@ local widget_clock        = require("widgets.clock")
 -- Right widgets
 local widget_tray         = require("widgets.tray")
 local widget_microphone   = require("widgets.microphone")
-local widget_volume       = require("widgets.volume")
-local widget_brightness   = require("widgets.brightness")
+local widget_volume       = require("widgets.wibar.volumeicon")
+local widget_battery      = require("widgets.wibar.battery")
 local widget_memory       = require("widgets.memory")
 local widget_cpu          = require("widgets.cpu")
 local widget_fan          = require("widgets.fan")
@@ -55,7 +55,7 @@ local function basicbar(s)
                     widget_tray(),
                     widget_microphone(),
                     widget_volume(),
-                    widget_brightness(),
+                    widget_battery(),
                     widget_memory(),
                     widget_cpu(),
                     widget_fan(),
